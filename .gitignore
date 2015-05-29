@@ -1,0 +1,8 @@
+# install
+*.log
+node_modules
+
+# test
+xunit.xml
+artifacts
+coverage
