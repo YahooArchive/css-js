@@ -4,7 +4,7 @@
   "licenses": [
     {
       "type": "BSD",
-      "url": "https://github.com/neraliu/css-js/blob/master/LICENSE"
+      "url": "https://github.com/yahoo/css-js/blob/master/LICENSE"
     }
   ],
   "author": "Nera Liu",
@@ -14,7 +14,7 @@
   "description": "CSS Parser",
   "repository": {
     "type": "git",
-    "url": "git@github.com:neraliu/css-js.git"
+    "url": "git@github.com:yahoo/css-js.git"
   },
   "keywords": [
     "css",
@@ -46,9 +46,9 @@
   },
   "main": "./src/css-parser.js",
   "bugs": {
-    "url": "https://github.com/neraliu/css-js/issues"
+    "url": "https://github.com/yahoo/css-js/issues"
   },
-  "homepage": "https://github.com/neraliu/css-js",
+  "homepage": "https://github.com/yahoo/css-js",
   "directories": {
     "test": "tests"
   },
