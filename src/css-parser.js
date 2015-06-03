@@ -30,14 +30,36 @@ function CSSParser(config) {
 
     this.cssParser === null? this.cssParser = cssParser21 : '';
     this.cssStringParser === null? this.cssStringParser = cssStringParser21 : '';
+
+    this.throwError = config.throwError !== undefined? config.throwError : true;
 }
 
 CSSParser.prototype.parse = function(str) {
-    return this.cssParser.parse(str);
+    var ast = {};
+    try {
+        ast = this.cssParser.parse(str);
+    } catch (err) {
+        if (this.throwError) {
+            throw err;
+        } else {
+            return false;
+        }
+    }
+    return ast;
 };
 
 CSSParser.prototype.parseCssString = function(str) {
-    return this.cssStringParser.parse(str);
+    var ast = {};
+    try {
+        ast = this.cssStringParser.parse(str);
+    } catch (err) {
+        if (this.throwError) {
+            throw err;
+        } else {
+            return false;
+        }
+    }
+    return ast;
 };
 
 module.exports = CSSParser;
