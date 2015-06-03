@@ -10,25 +10,25 @@ module.exports = function(grunt) {
     execute: {
       target21: {
         options: {
-          args: ['src/css-parser.21.y', 'src/css.21.l', '--outfile', 'src/css-parser.21.js']
+          args: ['src/y/css-parser.21.y', 'src/l/css.21.l', '--outfile', 'src/css-parser.21.js']
         },
         src: ['node_modules/jison/lib/cli.js']
       },
       target21_core: {
         options: {
-          args: ['src/css-parser.21.core.y', 'src/css.21.core.l', '--outfile', 'src/css-parser.21.core.js']
+          args: ['src/y/css-parser.21.core.y', 'src/l/css.21.core.l', '--outfile', 'src/css-parser.21.core.js']
         },
         src: ['node_modules/jison/lib/cli.js']
       },
       target21_attr: {
         options: {
-          args: ['src/css-parser.21.attr.y', 'src/css.21.l', '--outfile', 'src/css-parser.21.attr.js']
+          args: ['src/y/css-parser.21.attr.y', 'src/l/css.21.l', '--outfile', 'src/css-parser.21.attr.js']
         },
         src: ['node_modules/jison/lib/cli.js']
       },
       target3: {
         options: {
-          args: ['src/css-parser.3.y', 'src/css.3.l', '--outfile', 'src/css-parser.3.js']
+          args: ['src/y/css-parser.3.y', 'src/l/css.3.l', '--outfile', 'src/css-parser.3.js']
         },
         src: ['node_modules/jison/lib/cli.js']
       }
