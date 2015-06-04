@@ -36,8 +36,7 @@ comment		\/\*[^*]*\*+([^/*][^*]*\*+)*\/
 ident		\-?{nmstart}{nmchar}* 					/* escaped - */
 vendor          [\-_]{h}"-"{h}
 name		{nmchar}+
-/* TODO: the <number-token> pattern has been changed in CSS 3.0 */
-num             [0-9]+(\.[0-9]+)?|"."[0-9]+                             /* num          [0-9]+|[0-9]*"."[0-9]+ */
+num             [0-9]+(\.[0-9]+)?([eE][+\-][0-9])?|"."[0-9]+([eE][+\-][0-9])?
 string		{string1}|{string2}
 badstring       {badstring1}|{badstring2}
 badcomment      {badcomment1}|{badcomment2}
@@ -112,6 +111,10 @@ Z		"Z"|"z"|\\"0"{0,4}("5a"|"7a")(\r\n|[ \t\r\n\f])?|\\[z]
 
 "#"{name}		{return 'HASH';}
 
+// this is very tricky, as we support DIMENSION in the term production
+// it takes precedence before all other numeric definition.
+{num}{ident}		{return 'DIMENSION';}
+
 {num}{E}{M}		{return 'EMS';}					
 {num}{E}{X}		{return 'EXS';}					
 {num}{P}{X}		{return 'LENGTH';}				
@@ -127,7 +130,6 @@ Z		"Z"|"z"|\\"0"{0,4}("5a"|"7a")(\r\n|[ \t\r\n\f])?|\\[z]
 {num}{S}		{return 'TIME';} 				
 {num}{H}{Z}		{return 'FREQ';} 				
 {num}{K}{H}{Z}		{return 'FREQ';} 				
-{num}{ident}		{return 'DIMENSION';}
 
 {num}"%"		{return 'PERCENTAGE';}
 {num}			{return 'NUMBER';}
