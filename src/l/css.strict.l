@@ -44,7 +44,7 @@ baduri1         "url"\({w}([!#$%&*-\[\]-~]|{nonascii}|{escape})*{w}
 baduri2         "url"\({w}{string}{w}					
 baduri3         "url"\({w}{badstring}					
 comment		\/\*[^*]*\*+([^/*][^*]*\*+)*\/
-ident		[\-]?{nmstart}{nmchar}* 					/* escaped - */
+ident		[\-]?{nmstart}{nmchar}* 					
 vendor          [\-_]{h}"-"{h}
 name		{nmchar}+
 num             [0-9]+(\.[0-9]+)?([eE][+\-][0-9])?|"."[0-9]+([eE][+\-][0-9])?
@@ -126,9 +126,6 @@ Z               "Z"|"z"|\\"0"{0,4}("5a"|"7a")(\r\n|[ \t\r\n\f])?|\\[z]
 "@"{ident}		{return 'ATKEYWORD';}				
 
 "#"{name}		{return 'HASH';}
-
-{num}"+"{E}{digit}      {return 'NUMBER';}
-{num}"-"{E}{digit}      {return 'NUMBER';}
 
 {num}{E}{M}		{return 'EMS';}					
 {num}{E}{X}		{return 'EXS';}					
