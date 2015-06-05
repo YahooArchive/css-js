@@ -117,10 +117,6 @@ var css21TestPatterns = [
         result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: "1.0" } ] } ] } },
     { css: "e { border: .3; }",
         result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: ".3" } ] } ] } },
-/* TODO: need to support scientific notation
-    { css: "e { border: 1e+1; }",
-        result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: "1e+1" } ] } ] } },
-*/
     { css: "e { border: +1; }",
         result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: "+1" } ] } ] } },
     { css: "e { border: -1; }",
@@ -271,10 +267,6 @@ var css21TestPatterns = [
         result: { rulesets: [ { selector: 'e', declaration: [ { key: '-moz-opacity', value: '0.6' }, 
                                                               { key: '-khtml-opacity', value: '0.6' }, 
                                                               { key: 'opacity', value: '0.6' } ] } ] } },
-/*
-    { css: "e { border: 1-ident; }",
-        result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: '1 -ident' } ] } ] } },
-*/
 ];
 exports.css21TestPatterns = css21TestPatterns;
 
@@ -295,12 +287,15 @@ var css21InvalidTestPatterns = [
     { css: "element:  ident { color: red; text-align: center; }" }, /* no space between element_name and ident */
 
     { css: "e { border: 1ident; }" },
+    { css: "e { border: 1-ident; }" },
     { css: "e { color: function(); }" }, /* function must have expr as argument */
 
     /* {escape} \\[^\r\n\f0-9a-fA-F] */
     { css: "\\\r { color: red; text-align: center; }" },
     { css: "\\\n { color: red; text-align: center; }" },
     { css: "\\\f { color: red; text-align: center; }" },
+
+    { css: "e { border: 1e+1; }" },
 ];
 exports.css21InvalidTestPatterns = css21InvalidTestPatterns;
 
@@ -530,6 +525,23 @@ var css3TestPatterns = [
       result: { imports: [ { import: 'url("fineprint.css")', mediaqueries: [ { prefix: 'only', media_type: 'screen', expression: [
                                                                                                                                    { media_feature: 'orientation', value: 'landscape' },
                                                                                                                                  ] } ] } ] } },
+    */
+
+    { css: "e { border: 1; }",
+        result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: "1" } ] } ] } },
+    { css: "e { border: 1.0; }",
+        result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: "1.0" } ] } ] } },
+    { css: "e { border: .3; }",
+        result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: ".3" } ] } ] } },
+    { css: "e { border: +1; }",
+        result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: "+1" } ] } ] } },
+    { css: "e { border: -1; }",
+        result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: "-1" } ] } ] } },
+    { css: "e { border: 1ident; }",
+        result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: '1ident' } ] } ] } },
+    /* TODO: bug?
+    { css: "e { border: 1-ident; }",
+        result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: '1-ident' } ] } ] } },
     */
 
     { css: "@media screen { p { font-family: verdana, sans-serif; font-size: 17px; } }",
