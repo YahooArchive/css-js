@@ -16,6 +16,7 @@ TODO: need to add vendor-specific extensions
 */
 
 h		[0-9a-fA-F]						/* add A-Z for case-insensitive */
+digit		[0-9]
 nonascii	[\240-\377]
 unicode		\\{h}{1,6}(\r\n|[ \t\r\n\f])?
 /* TODO: the <unicode-range-token pattern has been changed in CSS 3.0 */
@@ -33,10 +34,10 @@ baduri1         "url"\({w}([!#$%&*-\[\]-~]|{nonascii}|{escape})*{w}
 baduri2         "url"\({w}{string}{w}					
 baduri3         "url"\({w}{badstring}					
 comment		\/\*[^*]*\*+([^/*][^*]*\*+)*\/
-ident		\-?{nmstart}{nmchar}* 					/* escaped - */
+ident		[\-]?{nmstart}{nmchar}* 				/* escaped - */
 vendor          [\-_]{h}"-"{h}
 name		{nmchar}+
-num             [0-9]+(\.[0-9]+)?([eE][+\-][0-9])?|"."[0-9]+([eE][+\-][0-9])?
+num             [0-9]+(\.[0-9]+)?([eE][+\-][0-9]+)?|"."[0-9]+([eE][+\-][0-9]+)?
 string		{string1}|{string2}
 badstring       {badstring1}|{badstring2}
 badcomment      {badcomment1}|{badcomment2}
@@ -111,10 +112,6 @@ Z		"Z"|"z"|\\"0"{0,4}("5a"|"7a")(\r\n|[ \t\r\n\f])?|\\[z]
 
 "#"{name}		{return 'HASH';}
 
-// this is very tricky, as we support DIMENSION in the term production
-// it takes precedence before all other numeric definition.
-{num}{ident}		{return 'DIMENSION';}
-
 {num}{E}{M}		{return 'EMS';}					
 {num}{E}{X}		{return 'EXS';}					
 {num}{P}{X}		{return 'LENGTH';}				
@@ -133,6 +130,8 @@ Z		"Z"|"z"|\\"0"{0,4}("5a"|"7a")(\r\n|[ \t\r\n\f])?|\\[z]
 
 {num}"%"		{return 'PERCENTAGE';}
 {num}			{return 'NUMBER';}
+
+{num}{ident}		{return 'DIMENSION';}
 
 /* TODO: the following patterns have not been added
 {ident}/\\          return IDENT;

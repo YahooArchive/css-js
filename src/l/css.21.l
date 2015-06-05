@@ -36,6 +36,7 @@ ident		\-?{nmstart}{nmchar}* 					/* escaped - */
 vendor          [\-_]{h}"-"{h}
 name		{nmchar}+
 num		[0-9]+(\.[0-9]+)?|"."[0-9]+                             /* num		[0-9]+|[0-9]*"."[0-9]+ */
+// num		[0-9]+(\.[0-9]+)?([eE][+\-][0-9])?|"."[0-9]+([eE][+\-][0-9])?
 string		{string1}|{string2}
 badstring       {badstring1}|{badstring2}
 badcomment      {badcomment1}|{badcomment2}
