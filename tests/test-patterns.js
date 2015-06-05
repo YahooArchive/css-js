@@ -591,4 +591,50 @@ var css3InvalidTestPatterns = [
 ];
 exports.css3InvalidTestPatterns = css3InvalidTestPatterns;
 
+var cssStrictTestPatterns = [
+    { css: 'a:b',             result: [ { key: 'a', value: 'b' } ] },
+    { css: 'a:"aA0"',         result: [ { key: 'a', value: '"aA0"' } ] },
+    { css: 'a:" !#$%&"',      result: [ { key: 'a', value: '" !#$%&"' } ] },
+    { css: "a:' !#$%&'",      result: [ { key: 'a', value: "' !#$%&'" } ] },
+
+    { css: 'a:"()"',          result: [ { key: 'a', value: '"()"' } ] },
+    { css: 'a:"*+,-./"',      result: [ { key: 'a', value: '"*+,-./"' } ] },
+    { css: 'a:":;<=>?@"',     result: [ { key: 'a', value: '":;<=>?@"' } ] },
+    { css: 'a:"[\\]^_`"',     result: [ { key: 'a', value: '"[\\]^_`"' } ] },
+    { css: 'a:"{|}~"',        result: [ { key: 'a', value: '"{|}~"' } ] },
+
+    { css: 'background:url(http://www.evil.com)', result: [ { key: 'background', value: 'url(http://www.evil.com)' } ] },
+    { css: 'background:url(foo://username:password@example.com:8042/over/there/index.dtb?type=animal&name=narwhal#nose)', 
+        result: [ { key: 'background', value: 'url(foo://username:password@example.com:8042/over/there/index.dtb?type=animal&name=narwhal#nose)' } ] },
+    { css: 'background:url()',    result: [ { key: 'background', value: 'url()' } ] },
+
+    // TODO: it is a strange pattern, do we need to have a URI validator?
+    { css: 'background:url([)',   result: [ { key: 'background', value: 'url([)' } ] },
+];
+exports.cssStrictTestPatterns = cssStrictTestPatterns;
+
+var cssStrictInvalidTestPatterns = [
+    { css: 'a:\u0000'   },
+    { css: 'a:\u0020'   },
+    { css: 'a:\u007F'   },
+    { css: 'e { a:b }'  },
+
+    { css: 'e { a:{  }' },
+    { css: 'e { a:}  }' },
+    { css: 'e { a:[  }' },
+    { css: 'e { a:]  }' },
+    { css: 'e { a:(  }' },
+    { css: 'e { a:)  }' },
+    { css: 'e { a:{} }' },
+    { css: 'e { a::  }' },
+    { css: 'e { a:;  }' },
+
+    { css: 'e { a: &NewLine;; }' },
+    { css: 'background:url(http://www.evil.com\u0000)' },
+
+    { css: 'background:url())', },
+    { css: 'background:url({})', },
+];
+exports.cssStrictInvalidTestPatterns = cssStrictInvalidTestPatterns;
+
 })();

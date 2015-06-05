@@ -31,7 +31,13 @@ module.exports = function(grunt) {
           args: ['src/y/css-parser.3.y', 'src/l/css.3.l', '--outfile', 'src/css-parser.3.js']
         },
         src: ['node_modules/jison/lib/cli.js']
-      }
+      },
+      targetstrict: {
+        options: {
+          args: ['src/y/css-parser.21.attr.y', 'src/l/css.strict.l', '--outfile', 'src/css-parser.strict.attr.js']
+        },
+        src: ['node_modules/jison/lib/cli.js']
+      },
     },
     mocha_istanbul: {
       target: {
@@ -41,7 +47,8 @@ module.exports = function(grunt) {
             'src/css-parser.21.attr.js',
             'src/css-parser.21.core.js',
             'src/css-parser.21.js',
-            'src/css-parser.3.js'
+            'src/css-parser.3.js',
+            'src/css-parser.strict.attr.js'
           ],
           coverage:true,
           check: {

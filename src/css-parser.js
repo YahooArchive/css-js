@@ -11,6 +11,7 @@ Authors: Nera Liu <neraliu@yahoo-inc.com, neraliu@gmail.com>
 var cssParser21 = require('./css-parser.21.js');
 var cssParser21Core = require('./css-parser.21.core.js');
 var cssStringParser21 = require('./css-parser.21.attr.js');
+var cssStrictStringParser = require('./css-parser.strict.attr.js');
 
 var cssParser3 = require('./css-parser.3.js');
 
@@ -27,6 +28,9 @@ function CSSParser(config) {
 
     config.ver === "3"? this.cssParser = cssParser3 : '';
     config.ver === "3"? this.cssStringParser = cssStringParser21 : '';
+
+    config.ver === "strict"? this.cssParser = '' : ''; // TODO: need to implement
+    config.ver === "strict"? this.cssStringParser = cssStrictStringParser : '';
 
     this.cssParser === null? this.cssParser = cssParser21 : '';
     this.cssStringParser === null? this.cssStringParser = cssStringParser21 : '';
