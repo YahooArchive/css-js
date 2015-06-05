@@ -34,7 +34,7 @@ module.exports = function(grunt) {
       },
       targetstrict: {
         options: {
-          args: ['src/y/css-parser.21.attr.y', 'src/l/css.strict.l', '--outfile', 'src/css-parser.strict.attr.js']
+          args: ['src/y/css-parser.strict.attr.y', 'src/l/css.strict.l', '--outfile', 'src/css-parser.strict.attr.js']
         },
         src: ['node_modules/jison/lib/cli.js']
       },

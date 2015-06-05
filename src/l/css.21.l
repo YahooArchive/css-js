@@ -32,10 +32,10 @@ baduri1         "url"\({w}([!#$%&*-\[\]-~]|{nonascii}|{escape})*{w}
 baduri2         "url"\({w}{string}{w}					
 baduri3         "url"\({w}{badstring}					
 comment		\/\*[^*]*\*+([^/*][^*]*\*+)*\/
-ident		\-?{nmstart}{nmchar}* 					/* escaped - */
+ident		[\-]?{nmstart}{nmchar}* 					
 vendor          [\-_]{h}"-"{h}
 name		{nmchar}+
-num		[0-9]+(\.[0-9]+)?|"."[0-9]+                             /* num		[0-9]+|[0-9]*"."[0-9]+ */
+num		[0-9]+(\.[0-9]+)?|"."[0-9]+                             
 string		{string1}|{string2}
 badstring       {badstring1}|{badstring2}
 badcomment      {badcomment1}|{badcomment2}

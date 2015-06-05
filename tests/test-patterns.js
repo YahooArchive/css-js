@@ -286,6 +286,7 @@ var css21InvalidTestPatterns = [
 
     { css: "element:  ident { color: red; text-align: center; }" }, /* no space between element_name and ident */
 
+    { css: "e { border: 1e+1; }" },
     { css: "e { border: 1ident; }" },
     { css: "e { border: 1-ident; }" },
     { css: "e { color: function(); }" }, /* function must have expr as argument */
@@ -294,8 +295,6 @@ var css21InvalidTestPatterns = [
     { css: "\\\r { color: red; text-align: center; }" },
     { css: "\\\n { color: red; text-align: center; }" },
     { css: "\\\f { color: red; text-align: center; }" },
-
-    { css: "e { border: 1e+1; }" },
 ];
 exports.css21InvalidTestPatterns = css21InvalidTestPatterns;
 
@@ -441,8 +440,11 @@ var css21CoreInvalidTestPatterns = [
     { css: "e { color: red, yellow; }" },
     { css: "e { color: red, yellow, green; }" },
 
+    { css: "e { border: 1.0; }" },
+    { css: "e { border: 0.3; }" },
     { css: "e { border: +1; }" },
     { css: "e { border: -1; }" },
+    { css: "e { border: 1e+1; }" },
     { css: "e { border: 1em; }" },
     { css: "e { border: 1ex; }" },
     { css: "e { border: 1px; }" },
@@ -533,16 +535,22 @@ var css3TestPatterns = [
         result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: "1.0" } ] } ] } },
     { css: "e { border: .3; }",
         result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: ".3" } ] } ] } },
+    { css: "e { border: 1e+1; }",
+        result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: '1e+1' } ] } ] } },
+    { css: "e { border: 1E-1; }",
+        result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: '1E-1' } ] } ] } },
+    { css: "e { border: 1e+1em; }",
+        result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: '1e+1em' } ] } ] } },
     { css: "e { border: +1; }",
         result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: "+1" } ] } ] } },
     { css: "e { border: -1; }",
         result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: "-1" } ] } ] } },
+    /* TODO (1): DIMENSION is not supported in CSS 3.0? 
+    http://www.w3.org/TR/2003/WD-css3-syntax-20030813/ */
     { css: "e { border: 1ident; }",
-        result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: '1ident' } ] } ] } },
-    /* TODO: bug?
+        result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: '1 ident' } ] } ] } },
     { css: "e { border: 1-ident; }",
-        result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: '1-ident' } ] } ] } },
-    */
+        result: { rulesets: [ { selector: 'e', declaration: [ { key: 'border', value: '1 -ident' } ] } ] } },
 
     { css: "@media screen { p { font-family: verdana, sans-serif; font-size: 17px; } }",
         result: { medias: { mediaqueries: [ { prefix: '', media_type: 'screen', expression: '' } ], rulesets: [ { "selector": "p", "declaration": [ { key: "font-family", value: "verdana ,sans-serif" }, { key: "font-size", value: "17px" } ] } ] }, } },
@@ -554,8 +562,13 @@ var css3TestPatterns = [
                      { key: "font-family", value: "verdana ,sans-serif" }, { key: "font-size", value: "17px" } ] }, 
                 { "selector": ".classname", "declaration": [ 
                      { key: "font-family", value: "georgia ,serif" }, { key: "font-size", value: "14px" }, { key: "color", value: "blue" } ] } ] }, } },
+    /* TODO: DIMENSION pattern is not supported in CSS 3.0? 
+    http://www.w3.org/TR/2003/WD-css3-syntax-20030813/ 
     { css: "@media all and (max-weight: 3kg) { p { font-family: verdana, sans-serif; font-size: 17px; } }",
         result: { medias: { mediaqueries: [ { prefix: '', media_type: 'all', expression: [ { media_feature: 'max-weight', value: '3kg' } ] } ], rulesets: [ { "selector": "p", "declaration": [ { key: "font-family", value: "verdana ,sans-serif" }, { key: "font-size", value: "17px" } ] } ] }, } },
+    */
+    { css: "@media all and (max-size: 3pt) { p { font-family: verdana, sans-serif; font-size: 17px; } }",
+        result: { medias: { mediaqueries: [ { prefix: '', media_type: 'all', expression: [ { media_feature: 'max-size', value: '3pt' } ] } ], rulesets: [ { "selector": "p", "declaration": [ { key: "font-family", value: "verdana ,sans-serif" }, { key: "font-size", value: "17px" } ] } ] }, } },
 
     /* vendor specific extension */
     { css: "e { -moz-opacity: 0.6; -khtml-opacity:0.6; opacity: 0.6; }",
@@ -579,6 +592,10 @@ var css3InvalidTestPatterns = [
 
     { css: "element:  ident { color: red; text-align: center; }" }, /* no space between element_name and ident */
 
+    /* Please refer to TODO (1)
+    { css: "e { border: 1ident; }" },
+    { css: "e { border: 1-ident; }" },
+    */
     { css: "e { color: function(); }" }, /* function must have expr as argument */
 
     /* {escape} \\[^\r\n\f0-9a-fA-F] */
@@ -603,6 +620,12 @@ var cssStrictTestPatterns = [
     { css: 'a:"[\\]^_`"',     result: [ { key: 'a', value: '"[\\]^_`"' } ] },
     { css: 'a:"{|}~"',        result: [ { key: 'a', value: '"{|}~"' } ] },
 
+    { css: "a:'()'",          result: [ { key: 'a', value: "'()'" } ] },
+    { css: "a:'*+,-./'",      result: [ { key: 'a', value: "'*+,-./'" } ] },
+    { css: "a:':;<=>?@'",     result: [ { key: 'a', value: "':;<=>?@'" } ] },
+    { css: "a:'[\\]^_`'",     result: [ { key: 'a', value: "'[\\]^_`'" } ] },
+    { css: "a:'{|}~'",        result: [ { key: 'a', value: "'{|}~'" } ] },
+
     { css: 'background:url(http://www.evil.com)', result: [ { key: 'background', value: 'url(http://www.evil.com)' } ] },
     { css: 'background:url(foo://username:password@example.com:8042/over/there/index.dtb?type=animal&name=narwhal#nose)', 
         result: [ { key: 'background', value: 'url(foo://username:password@example.com:8042/over/there/index.dtb?type=animal&name=narwhal#nose)' } ] },
@@ -610,6 +633,31 @@ var cssStrictTestPatterns = [
 
     // TODO: it is a strange pattern, do we need to have a URI validator?
     { css: 'background:url([)',   result: [ { key: 'background', value: 'url([)' } ] },
+
+    { css: 'a:1',             result: [ { key: 'a', value: '1' } ] },
+    { css: 'a:1.0',           result: [ { key: 'a', value: '1.0' } ] },
+    { css: 'a:.3',            result: [ { key: 'a', value: '.3' } ] },
+    { css: 'a:+1',            result: [ { key: 'a', value: '+1' } ] },
+    { css: 'a:-1',            result: [ { key: 'a', value: '-1' } ] },
+    { css: 'a:1e+1',          result: [ { key: 'a', value: '1e+1' } ] },
+    { css: 'a:1E-1',          result: [ { key: 'a', value: '1E-1' } ] },
+    { css: 'a:1em',           result: [ { key: 'a', value: '1em' } ] },
+    { css: 'a:1e+1em',        result: [ { key: 'a', value: '1e+1em' } ] },
+    { css: 'a:1ex',           result: [ { key: 'a', value: '1ex' } ] },
+    { css: 'a:1px',           result: [ { key: 'a', value: '1px' } ] },
+    { css: 'a:1cm',           result: [ { key: 'a', value: '1cm' } ] },
+    { css: 'a:1mm',           result: [ { key: 'a', value: '1mm' } ] },
+    { css: 'a:1in',           result: [ { key: 'a', value: '1in' } ] },
+    { css: 'a:1pt',           result: [ { key: 'a', value: '1pt' } ] },
+    { css: 'a:1pc',           result: [ { key: 'a', value: '1pc' } ] },
+    { css: 'a:1deg',          result: [ { key: 'a', value: '1deg' } ] },
+    { css: 'a:1rad',          result: [ { key: 'a', value: '1rad' } ] },
+    { css: 'a:1grad',         result: [ { key: 'a', value: '1grad' } ] },
+    { css: 'a:1ms',           result: [ { key: 'a', value: '1ms' } ] },
+    { css: 'a:1s',            result: [ { key: 'a', value: '1s' } ] },
+    { css: 'a:1hz',           result: [ { key: 'a', value: '1hz' } ] },
+    { css: 'a:1khz',          result: [ { key: 'a', value: '1khz' } ] },
+    { css: 'a:1%',            result: [ { key: 'a', value: '1%' } ] },
 ];
 exports.cssStrictTestPatterns = cssStrictTestPatterns;
 

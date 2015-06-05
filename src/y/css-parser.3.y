@@ -10,6 +10,7 @@ Grammer of CSS 3 specification
 Reference:
 - http://www.w3.org/TR/css3-syntax/
 - http://www.w3.org/TR/css-syntax-3/
+- http://www.w3.org/TR/2003/WD-css3-syntax-20030813/#detailed-grammar
 */
 
 %start stylesheet
@@ -401,8 +402,6 @@ numeric_term
   | ANGLE space_or_empty		-> $1
   | TIME space_or_empty			-> $1
   | FREQ space_or_empty			-> $1
-/* CSS3.0 */
-  | DIMENSION space_or_empty            -> $1
   ;
 string_term
   : STRING space_or_empty		-> $1
