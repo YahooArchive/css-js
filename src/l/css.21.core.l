@@ -11,7 +11,6 @@ Reference:
 - http://www.w3.org/TR/2011/REC-CSS2-20110607/syndata.html
 - http://www.w3.org/TR/2011/REC-CSS2-20110607/grammar.html
 
-TODO: need to add vendor-specific extensions
 */
 
 h		[0-9a-fA-F]						/* add A-Z for case-insensitive */
@@ -33,6 +32,7 @@ baduri2         "url"\({w}{string}{w}
 baduri3         "url"\({w}{badstring}					
 comment		\/\*[^*]*\*+([^/*][^*]*\*+)*\/
 ident		[\-]?{nmstart}{nmchar}* 					
+vendor          [\-_]{h}"-"{h}
 name		{nmchar}+
 num		[0-9]+|[0-9]*"."[0-9]+
 string		{string1}|{string2}
@@ -90,6 +90,7 @@ Z		"Z"|"z"|\\"0"{0,4}("5a"|"7a")(\r\n|[ \t\r\n\f])?|\\[z]
 
 {ident}"("		{return 'FUNCTION';}
 {ident}			{return 'IDENT';}
+{vendor}                {return 'VENDOR';}
 "@"{ident}		{return 'ATKEYWORD';}
 
 "#"{name}		{return 'HASH';}
