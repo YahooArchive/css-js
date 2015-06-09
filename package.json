@@ -27,10 +27,6 @@
     "clean": "grunt clean",
     "test": "grunt test"
   },
-  "dependencies": {
-    "fs": "0.0.2",
-    "path": "^0.11.14"
-  },
   "devDependencies": {
     "chai": "^2.2.0",
     "expect.js": "^0.3.1",
