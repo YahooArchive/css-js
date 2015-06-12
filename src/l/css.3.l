@@ -23,7 +23,7 @@ unicode		\\{h}{1,6}(\r\n|[ \t\r\n\f])?
 unicoderange	[0-9a-fA-F?]{1,6}(\-[0-9a-fA-F]{1,6})?			
 escape		{unicode}|\\[^\r\n\f0-9a-fA-F]				/* add A-Z for case-insensitive */
 nmstart		[_a-zA-Z]|{nonascii}|{escape}				/* add A-Z for case-insensitive */
-nmchar		[_a-zZ-Z0-9\-]|{nonascii}|{escape}			/* add A-Z for case-insensitive, escape - */
+nmchar		[_a-zA-Z0-9\-]|{nonascii}|{escape}			/* add A-Z for case-insensitive, escape - */
 string1		\"([^\n\r\f\\"]|\\{nl}|{escape})*\"
 string2		\'([^\n\r\f\\']|\\{nl}|{escape})*\'
 badstring1      \"([^\n\r\f\\"]|\\{nl}|{escape})*\\?

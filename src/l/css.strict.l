@@ -24,8 +24,8 @@ unicoderange	[0-9a-fA-F?]{1,6}(\-[0-9a-fA-F]{1,6})?
 escape		{unicode}|\\[^\r\n\f0-9a-fA-F]				/* add A-Z for case-insensitive */
 // nmstart	[_a-zA-Z]|{nonascii}|{escape}				/* add A-Z for case-insensitive */
 nmstart		[_a-zA-Z]                                               /* Strict CSS Parser: remove the {nonascii} and {escape} lexical definition */
-// nmchar	[_a-zZ-Z0-9\-]|{nonascii}|{escape}			/* add A-Z for case-insensitive, escape - */
-nmchar		[_a-zZ-Z0-9\-]                                          /* Strict CSS Parser: remove the {nonascii} and {escape} lexical definition */
+// nmchar	[_a-zA-Z0-9\-]|{nonascii}|{escape}			/* add A-Z for case-insensitive, escape - */
+nmchar		[_a-zA-Z0-9\-]                                          /* Strict CSS Parser: remove the {nonascii} and {escape} lexical definition */
 
 // Reference: http://unicode.org/charts/PDF/U0000.pdf
 // Basic ASCII (\u20-\u7E): <space>!"#$%&'\(\)\*+,\-\.\/0-9:;<=>?@A-Z\[\\\]^_`a-z\{\|\}~
