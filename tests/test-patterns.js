@@ -610,6 +610,7 @@ exports.css3InvalidTestPatterns = css3InvalidTestPatterns;
 
 var cssStrictTestPatterns = [
     { css: 'a:b',             result: [ { key: 'a', value: 'b' } ] },
+    { css: 'A:B',             result: [ { key: 'A', value: 'B' } ] },
     { css: 'a:"aA0"',         result: [ { key: 'a', value: '"aA0"' } ] },
     { css: 'a:" !#$%&"',      result: [ { key: 'a', value: '" !#$%&"' } ] },
     { css: "a:' !#$%&'",      result: [ { key: 'a', value: "' !#$%&'" } ] },
