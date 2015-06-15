@@ -12,7 +12,6 @@ Reference:
 - http://www.w3.org/TR/2011/REC-CSS2-20110607/grammar.html
 - http://www.w3.org/TR/css3-syntax/
 
-TODO: need to add vendor-specific extensions
 */
 
 h		[0-9a-fA-F]						/* add A-Z for case-insensitive */
